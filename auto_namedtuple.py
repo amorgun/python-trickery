@@ -1,5 +1,6 @@
 # Python >= 3.5
 from typing import Dict, NamedTuple
+import json
 
 
 class StructMeta(type):
@@ -19,6 +20,11 @@ class BaseStruct(metaclass=StructMeta):
     def from_dict(cls, data: Dict):
         return cls(**data)
 
+    def as_json(self) -> str:
+        return json.dumps(self.as_dict())
+
+    # Some other useful methods
+
 
 class Person(BaseStruct):
     __fields__ = [
@@ -34,3 +40,4 @@ guido = Person.from_dict({
 
 
 print(guido)
+print(guido.as_json())
