@@ -2,7 +2,7 @@
 from typing import Dict, NamedTuple
 
 
-class TaskMeta(type):
+class StructMeta(type):
     def __new__(mcl, name, bases, dict_):
         if "__fields__" in dict_:
             base_namedtuple = NamedTuple(name, dict_["__fields__"])
@@ -11,7 +11,7 @@ class TaskMeta(type):
         return super().__new__(mcl, name, bases, dict_)
 
 
-class BaseStruct(metaclass=TaskMeta):
+class BaseStruct(metaclass=StructMeta):
     def as_dict(self) -> Dict:
         return self._asdict()
 
